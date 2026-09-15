@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 460" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1040" height="460" fill="#ffffff"/>
+  <text x="520" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1f2328">DeepBreath — System Architecture</text>
+  <text x="520" y="56" text-anchor="middle" font-size="13" fill="#6b7280">Legacy MSc research artifacts feed a refactored engineering package, which is served by the application runtime</text>
+
+  <!-- Column headers -->
+  <rect x="30" y="90" width="290" height="330" rx="10" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="175" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#374151">Research Artifacts (legacy)</text>
+
+  <rect x="375" y="90" width="290" height="330" rx="10" fill="#eef4ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="520" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">Refactored Package</text>
+  <text x="520" y="136" text-anchor="middle" font-size="11" fill="#1d4ed8">src/deepbreath/</text>
+
+  <rect x="720" y="90" width="290" height="330" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="865" y="118" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">Application Runtime</text>
+
+  <!-- Research items -->
+  <g font-size="12.5" fill="#374151">
+    <rect x="50" y="150" width="250" height="40" rx="6" fill="#ffffff" stroke="#9ca3af"/>
+    <text x="175" y="174" text-anchor="middle">Archived MSc notebooks</text>
+
+    <rect x="50" y="200" width="250" height="40" rx="6" fill="#ffffff" stroke="#9ca3af"/>
+    <text x="175" y="220" text-anchor="middle">MSc paper (kept private,</text>
+    <text x="175" y="234" text-anchor="middle">not published)</text>
+
+    <rect x="50" y="250" width="250" height="40" rx="6" fill="#ffffff" stroke="#9ca3af"/>
+    <text x="175" y="270" text-anchor="middle">Legacy sample-level split</text>
+    <text x="175" y="284" text-anchor="middle">+ results (reports/metrics)</text>
+
+    <rect x="50" y="300" width="250" height="40" rx="6" fill="#ffffff" stroke="#9ca3af"/>
+    <text x="175" y="324" text-anchor="middle">Patient-independent grouped</text>
+  </g>
+  <text x="175" y="360" text-anchor="middle" font-size="11" fill="#6b7280">evaluation reports</text>
+
+  <!-- Package items -->
+  <g font-size="12.5" fill="#1d4ed8">
+    <rect x="395" y="150" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="455" y="171" text-anchor="middle">data</text>
+    <rect x="525" y="150" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="585" y="171" text-anchor="middle">features</text>
+
+    <rect x="395" y="196" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="455" y="217" text-anchor="middle">models</text>
+    <rect x="525" y="196" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="585" y="217" text-anchor="middle">training</text>
+
+    <rect x="395" y="242" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="455" y="263" text-anchor="middle">inference</text>
+    <rect x="525" y="242" width="120" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="585" y="263" text-anchor="middle">reporting</text>
+
+    <rect x="395" y="292" width="250" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="520" y="313" text-anchor="middle">app (FastAPI + runtime config)</text>
+
+    <rect x="395" y="342" width="250" height="34" rx="6" fill="#ffffff" stroke="#3b82f6"/>
+    <text x="520" y="363" text-anchor="middle">ml_contract (shared shapes / classes)</text>
+  </g>
+
+  <!-- Runtime items -->
+  <g font-size="12.5" fill="#047857">
+    <rect x="740" y="150" width="250" height="40" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="865" y="174" text-anchor="middle">FastAPI inference service</text>
+
+    <rect x="740" y="200" width="250" height="40" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="865" y="224" text-anchor="middle">Docker image (non-root user)</text>
+
+    <rect x="740" y="250" width="250" height="40" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="865" y="270" text-anchor="middle">Legacy H5 model artifact</text>
+    <text x="865" y="284" text-anchor="middle" font-size="10.5">melspectogramTrained.h5</text>
+
+    <rect x="740" y="300" width="250" height="40" rx="6" fill="#fffbeb" stroke="#f59e0b"/>
+    <text x="865" y="320" text-anchor="middle" fill="#b45309">Optional LLM reporting layer</text>
+    <text x="865" y="334" text-anchor="middle" font-size="10.5" fill="#b45309">(env-gated, not required)</text>
+  </g>
+
+  <!-- Arrows between columns -->
+  <path d="M320,255 L370,255" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M665,255 L715,255" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <text x="520" y="440" text-anchor="middle" font-size="11.5" fill="#6b7280">Research artifacts are preserved for provenance only; the FastAPI/Docker runtime serves the refactored package, not the raw notebooks.</text>
+</svg>

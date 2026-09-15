@@ -1,0 +1,17 @@
+{
+  "note": "Example output only. This is not a real clinical result and must not be used for diagnosis.",
+  "response": {
+    "prediction": "COPD",
+    "confidence": 0.8134679794311523,
+    "probabilities": {
+      "Bronchiectasis": 2.4088222735918485e-11,
+      "Bronchiolitis": 0.18653197586536407,
+      "COPD": 0.8134679794311523,
+      "Healthy": 1.0347745993399826e-9,
+      "Pneumonia": 1.3798381326424192e-9,
+      "URTI": 1.51135175485706e-8
+    },
+    "model": "deepbreath_legacy_cnn",
+    "disclaimer": "Research prototype only. Not for medical diagnosis."
+  }
+}

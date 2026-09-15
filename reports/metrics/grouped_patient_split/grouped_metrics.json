@@ -1,0 +1,202 @@
+{
+  "accuracy": 0.45348837209302323,
+  "balanced_accuracy": 0.4391268728214032,
+  "macro_f1": 0.3483098510841445,
+  "weighted_f1": 0.44423624211887314,
+  "classification_report": {
+    "Bronchiectasis": {
+      "precision": 0.2857142857142857,
+      "recall": 0.058823529411764705,
+      "f1-score": 0.0975609756097561,
+      "support": 102.0
+    },
+    "Bronchiolitis": {
+      "precision": 0.16417910447761194,
+      "recall": 0.09649122807017543,
+      "f1-score": 0.12154696132596685,
+      "support": 114.0
+    },
+    "COPD": {
+      "precision": 0.4027777777777778,
+      "recall": 0.26851851851851855,
+      "f1-score": 0.32222222222222224,
+      "support": 108.0
+    },
+    "Healthy": {
+      "precision": 0.36619718309859156,
+      "recall": 0.6190476190476191,
+      "f1-score": 0.46017699115044247,
+      "support": 84.0
+    },
+    "Pneumonia": {
+      "precision": 0.831275720164609,
+      "recall": 0.6474358974358975,
+      "f1-score": 0.7279279279279279,
+      "support": 312.0
+    },
+    "URTI": {
+      "precision": 0.22270742358078602,
+      "recall": 0.9444444444444444,
+      "f1-score": 0.36042402826855124,
+      "support": 54.0
+    },
+    "accuracy": 0.45348837209302323,
+    "macro avg": {
+      "precision": 0.3788085824689437,
+      "recall": 0.4391268728214032,
+      "f1-score": 0.3483098510841445,
+      "support": 774.0
+    },
+    "weighted avg": {
+      "precision": 0.5084031834603451,
+      "recall": 0.45348837209302323,
+      "f1-score": 0.44423624211887314,
+      "support": 774.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      6,
+      3,
+      0,
+      78,
+      0,
+      15
+    ],
+    [
+      0,
+      11,
+      0,
+      6,
+      0,
+      97
+    ],
+    [
+      13,
+      27,
+      29,
+      0,
+      39,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      52,
+      0,
+      32
+    ],
+    [
+      2,
+      25,
+      43,
+      6,
+      202,
+      34
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      2,
+      51
+    ]
+  ],
+  "split_method": "patient-level grouped holdout",
+  "class_order": [
+    "Bronchiectasis",
+    "Bronchiolitis",
+    "COPD",
+    "Healthy",
+    "Pneumonia",
+    "URTI"
+  ],
+  "epochs": 200,
+  "input_shapes": {
+    "train": [
+      2052,
+      128,
+      259,
+      1
+    ],
+    "validation": [
+      918,
+      128,
+      259,
+      1
+    ],
+    "test": [
+      774,
+      128,
+      259,
+      1
+    ]
+  },
+  "split_distribution": {
+    "train": {
+      "patients": 22,
+      "samples": 2052,
+      "base_cycles": 342,
+      "samples_by_class": {
+        "Bronchiectasis": 276,
+        "Bronchiolitis": 342,
+        "COPD": 186,
+        "Healthy": 432,
+        "Pneumonia": 312,
+        "URTI": 504
+      },
+      "patients_by_class": {
+        "Bronchiectasis": 5,
+        "Bronchiolitis": 2,
+        "COPD": 1,
+        "Healthy": 7,
+        "Pneumonia": 1,
+        "URTI": 6
+      }
+    },
+    "validation": {
+      "patients": 5,
+      "samples": 918,
+      "base_cycles": 153,
+      "samples_by_class": {
+        "Bronchiectasis": 246,
+        "Bronchiolitis": 168,
+        "COPD": 330,
+        "Healthy": 108,
+        "Pneumonia": 0,
+        "URTI": 66
+      },
+      "patients_by_class": {
+        "Bronchiectasis": 1,
+        "Bronchiolitis": 1,
+        "COPD": 1,
+        "Healthy": 1,
+        "Pneumonia": 0,
+        "URTI": 1
+      }
+    },
+    "test": {
+      "patients": 6,
+      "samples": 774,
+      "base_cycles": 129,
+      "samples_by_class": {
+        "Bronchiectasis": 102,
+        "Bronchiolitis": 114,
+        "COPD": 108,
+        "Healthy": 84,
+        "Pneumonia": 312,
+        "URTI": 54
+      },
+      "patients_by_class": {
+        "Bronchiectasis": 1,
+        "Bronchiolitis": 1,
+        "COPD": 1,
+        "Healthy": 1,
+        "Pneumonia": 1,
+        "URTI": 1
+      }
+    }
+  }
+}

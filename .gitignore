@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*secret*
+*credentials*
+.DS_Store
+
+# Large local data artifacts
+data/raw/
+data/processed/
+processed_audio_files/
+mSpec_variable_train.txt
+mSpec_variable_val.txt
+
+# Runtime outputs
+outputs/
+reports/generated/
+
+# Private/raw research provenance copies
+notebooks/archive/raw/
+docs/original_private/
+
+# Local legacy paper reference — do not publish
+legacy-paper/
+
+# MSc assignment PDF copy contains student numbers on the cover page — do not publish
+docs/ML_Assignment_G26_DeepBreath_v5_27032026.pdf

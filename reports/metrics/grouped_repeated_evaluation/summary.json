@@ -1,0 +1,521 @@
+{
+  "seeds": [
+    7,
+    21,
+    42,
+    84,
+    168
+  ],
+  "epochs": 200,
+  "metrics": [
+    {
+      "metric": "accuracy",
+      "mean": 0.36945037696821287,
+      "std": 0.051530259016019264,
+      "min": 0.29705882352941176,
+      "max": 0.4147940074906367,
+      "ci95_half_width": 0.04516826352673227
+    },
+    {
+      "metric": "balanced_accuracy",
+      "mean": 0.41574112540345665,
+      "std": 0.08737758189846609,
+      "min": 0.2686307113938693,
+      "max": 0.4749579506416452,
+      "ci95_half_width": 0.0765898274311339
+    },
+    {
+      "metric": "macro_f1",
+      "mean": 0.32950284610121555,
+      "std": 0.06873930247315985,
+      "min": 0.24761699183464256,
+      "max": 0.41259855499743053,
+      "ci95_half_width": 0.06025265519791469
+    },
+    {
+      "metric": "weighted_f1",
+      "mean": 0.3451025319282722,
+      "std": 0.047980755462352385,
+      "min": 0.27329651804477595,
+      "max": 0.39174414650158984,
+      "ci95_half_width": 0.0420569864836408
+    }
+  ],
+  "cv_feasibility": {
+    "grouped_cv_used": false,
+    "minimum_patients_per_class": 2,
+    "rare_classes": [
+      "Bronchiolitis",
+      "COPD",
+      "Pneumonia"
+    ],
+    "reason": "Grouped cross-validation is not used because several diseases have too few patient groups for statistically meaningful StratifiedGroupKFold. Pneumonia has only two patients, so repeated grouped holdout is a clearer reliability probe without pretending fold-level class balance is robust."
+  },
+  "split_summaries": {
+    "7": {
+      "method": "deterministic class-aware patient-level grouped split",
+      "random_seed": 7,
+      "split_names": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "total_rows": 3744,
+      "total_patients": 33,
+      "total_base_cycles": 624,
+      "patient_counts": {
+        "train": 22,
+        "validation": 5,
+        "test": 6
+      },
+      "sample_counts": {
+        "train": 2244,
+        "validation": 480,
+        "test": 1020
+      },
+      "base_cycle_counts": {
+        "train": 374,
+        "validation": 80,
+        "test": 170
+      },
+      "patient_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "base_cycle_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "class_distribution_samples": {
+        "train": {
+          "Bronchiectasis": 492,
+          "Bronchiolitis": 474,
+          "COPD": 108,
+          "Healthy": 432,
+          "Pneumonia": 312,
+          "URTI": 426
+        },
+        "validation": {
+          "Bronchiectasis": 48,
+          "Bronchiolitis": 36,
+          "COPD": 186,
+          "Healthy": 108,
+          "Pneumonia": 0,
+          "URTI": 102
+        },
+        "test": {
+          "Bronchiectasis": 84,
+          "Bronchiolitis": 114,
+          "COPD": 330,
+          "Healthy": 84,
+          "Pneumonia": 312,
+          "URTI": 96
+        }
+      },
+      "class_distribution_patients": {
+        "train": {
+          "Bronchiectasis": 5,
+          "Bronchiolitis": 2,
+          "COPD": 1,
+          "Healthy": 7,
+          "Pneumonia": 1,
+          "URTI": 6
+        },
+        "validation": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 0,
+          "URTI": 1
+        },
+        "test": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 1,
+          "URTI": 1
+        }
+      },
+      "limitations": [
+        "Patient isolation is prioritised over exact class balance.",
+        "Classes with very few patients may be absent from validation or test splits."
+      ]
+    },
+    "21": {
+      "method": "deterministic class-aware patient-level grouped split",
+      "random_seed": 21,
+      "split_names": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "total_rows": 3744,
+      "total_patients": 33,
+      "total_base_cycles": 624,
+      "patient_counts": {
+        "train": 22,
+        "validation": 5,
+        "test": 6
+      },
+      "sample_counts": {
+        "train": 2484,
+        "validation": 450,
+        "test": 810
+      },
+      "base_cycle_counts": {
+        "train": 414,
+        "validation": 75,
+        "test": 135
+      },
+      "patient_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "base_cycle_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "class_distribution_samples": {
+        "train": {
+          "Bronchiectasis": 516,
+          "Bronchiolitis": 420,
+          "COPD": 330,
+          "Healthy": 480,
+          "Pneumonia": 312,
+          "URTI": 426
+        },
+        "validation": {
+          "Bronchiectasis": 66,
+          "Bronchiolitis": 36,
+          "COPD": 186,
+          "Healthy": 60,
+          "Pneumonia": 0,
+          "URTI": 102
+        },
+        "test": {
+          "Bronchiectasis": 42,
+          "Bronchiolitis": 168,
+          "COPD": 108,
+          "Healthy": 84,
+          "Pneumonia": 312,
+          "URTI": 96
+        }
+      },
+      "class_distribution_patients": {
+        "train": {
+          "Bronchiectasis": 5,
+          "Bronchiolitis": 2,
+          "COPD": 1,
+          "Healthy": 7,
+          "Pneumonia": 1,
+          "URTI": 6
+        },
+        "validation": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 0,
+          "URTI": 1
+        },
+        "test": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 1,
+          "URTI": 1
+        }
+      },
+      "limitations": [
+        "Patient isolation is prioritised over exact class balance.",
+        "Classes with very few patients may be absent from validation or test splits."
+      ]
+    },
+    "42": {
+      "method": "deterministic class-aware patient-level grouped split",
+      "random_seed": 42,
+      "split_names": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "total_rows": 3744,
+      "total_patients": 33,
+      "total_base_cycles": 624,
+      "patient_counts": {
+        "train": 22,
+        "validation": 5,
+        "test": 6
+      },
+      "sample_counts": {
+        "train": 2052,
+        "validation": 918,
+        "test": 774
+      },
+      "base_cycle_counts": {
+        "train": 342,
+        "validation": 153,
+        "test": 129
+      },
+      "patient_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "base_cycle_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "class_distribution_samples": {
+        "train": {
+          "Bronchiectasis": 276,
+          "Bronchiolitis": 342,
+          "COPD": 186,
+          "Healthy": 432,
+          "Pneumonia": 312,
+          "URTI": 504
+        },
+        "validation": {
+          "Bronchiectasis": 246,
+          "Bronchiolitis": 168,
+          "COPD": 330,
+          "Healthy": 108,
+          "Pneumonia": 0,
+          "URTI": 66
+        },
+        "test": {
+          "Bronchiectasis": 102,
+          "Bronchiolitis": 114,
+          "COPD": 108,
+          "Healthy": 84,
+          "Pneumonia": 312,
+          "URTI": 54
+        }
+      },
+      "class_distribution_patients": {
+        "train": {
+          "Bronchiectasis": 5,
+          "Bronchiolitis": 2,
+          "COPD": 1,
+          "Healthy": 7,
+          "Pneumonia": 1,
+          "URTI": 6
+        },
+        "validation": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 0,
+          "URTI": 1
+        },
+        "test": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 1,
+          "URTI": 1
+        }
+      },
+      "limitations": [
+        "Patient isolation is prioritised over exact class balance.",
+        "Classes with very few patients may be absent from validation or test splits."
+      ]
+    },
+    "84": {
+      "method": "deterministic class-aware patient-level grouped split",
+      "random_seed": 84,
+      "split_names": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "total_rows": 3744,
+      "total_patients": 33,
+      "total_base_cycles": 624,
+      "patient_counts": {
+        "train": 22,
+        "validation": 5,
+        "test": 6
+      },
+      "sample_counts": {
+        "train": 2382,
+        "validation": 294,
+        "test": 1068
+      },
+      "base_cycle_counts": {
+        "train": 397,
+        "validation": 49,
+        "test": 178
+      },
+      "patient_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "base_cycle_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "class_distribution_samples": {
+        "train": {
+          "Bronchiectasis": 510,
+          "Bronchiolitis": 474,
+          "COPD": 186,
+          "Healthy": 480,
+          "Pneumonia": 312,
+          "URTI": 420
+        },
+        "validation": {
+          "Bronchiectasis": 48,
+          "Bronchiolitis": 36,
+          "COPD": 108,
+          "Healthy": 36,
+          "Pneumonia": 0,
+          "URTI": 66
+        },
+        "test": {
+          "Bronchiectasis": 66,
+          "Bronchiolitis": 114,
+          "COPD": 330,
+          "Healthy": 108,
+          "Pneumonia": 312,
+          "URTI": 138
+        }
+      },
+      "class_distribution_patients": {
+        "train": {
+          "Bronchiectasis": 5,
+          "Bronchiolitis": 2,
+          "COPD": 1,
+          "Healthy": 7,
+          "Pneumonia": 1,
+          "URTI": 6
+        },
+        "validation": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 0,
+          "URTI": 1
+        },
+        "test": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 1,
+          "URTI": 1
+        }
+      },
+      "limitations": [
+        "Patient isolation is prioritised over exact class balance.",
+        "Classes with very few patients may be absent from validation or test splits."
+      ]
+    },
+    "168": {
+      "method": "deterministic class-aware patient-level grouped split",
+      "random_seed": 168,
+      "split_names": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "total_rows": 3744,
+      "total_patients": 33,
+      "total_base_cycles": 624,
+      "patient_counts": {
+        "train": 22,
+        "validation": 5,
+        "test": 6
+      },
+      "sample_counts": {
+        "train": 2172,
+        "validation": 630,
+        "test": 942
+      },
+      "base_cycle_counts": {
+        "train": 362,
+        "validation": 105,
+        "test": 157
+      },
+      "patient_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "base_cycle_overlap_counts": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "class_distribution_samples": {
+        "train": {
+          "Bronchiectasis": 456,
+          "Bronchiolitis": 204,
+          "COPD": 330,
+          "Healthy": 486,
+          "Pneumonia": 312,
+          "URTI": 384
+        },
+        "validation": {
+          "Bronchiectasis": 102,
+          "Bronchiolitis": 114,
+          "COPD": 186,
+          "Healthy": 90,
+          "Pneumonia": 0,
+          "URTI": 138
+        },
+        "test": {
+          "Bronchiectasis": 66,
+          "Bronchiolitis": 306,
+          "COPD": 108,
+          "Healthy": 48,
+          "Pneumonia": 312,
+          "URTI": 102
+        }
+      },
+      "class_distribution_patients": {
+        "train": {
+          "Bronchiectasis": 5,
+          "Bronchiolitis": 2,
+          "COPD": 1,
+          "Healthy": 7,
+          "Pneumonia": 1,
+          "URTI": 6
+        },
+        "validation": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 0,
+          "URTI": 1
+        },
+        "test": {
+          "Bronchiectasis": 1,
+          "Bronchiolitis": 1,
+          "COPD": 1,
+          "Healthy": 1,
+          "Pneumonia": 1,
+          "URTI": 1
+        }
+      },
+      "limitations": [
+        "Patient isolation is prioritised over exact class balance.",
+        "Classes with very few patients may be absent from validation or test splits."
+      ]
+    }
+  }
+}

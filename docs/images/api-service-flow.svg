@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 320" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrowDash2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b45309"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1040" height="320" fill="#ffffff"/>
+  <text x="520" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#1f2328">DeepBreath — API / Service Workflow</text>
+  <text x="520" y="53" text-anchor="middle" font-size="13" fill="#6b7280">Client request through the FastAPI service to a structured JSON response</text>
+
+  <g font-size="12.5">
+    <rect x="20" y="110" width="130" height="60" rx="8" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="85" y="136" text-anchor="middle" fill="#374151" font-weight="600">Client</text>
+    <text x="85" y="152" text-anchor="middle" fill="#374151" font-size="10.5">curl / Swagger UI /</text>
+    <text x="85" y="164" text-anchor="middle" fill="#374151" font-size="10.5">demo script</text>
+
+    <rect x="185" y="110" width="130" height="60" rx="8" fill="#eef4ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="250" y="136" text-anchor="middle" fill="#1d4ed8" font-weight="600">FastAPI</text>
+    <text x="250" y="152" text-anchor="middle" fill="#1d4ed8" font-size="10.5">POST /predict</text>
+    <text x="250" y="164" text-anchor="middle" fill="#1d4ed8" font-size="10.5">GET /health</text>
+
+    <rect x="350" y="110" width="130" height="60" rx="8" fill="#eef4ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="415" y="136" text-anchor="middle" fill="#1d4ed8" font-weight="600">Input validation</text>
+    <text x="415" y="152" text-anchor="middle" fill="#1d4ed8" font-size="10.5">file type, size,</text>
+    <text x="415" y="164" text-anchor="middle" fill="#1d4ed8" font-size="10.5">duration checks</text>
+
+    <rect x="515" y="110" width="130" height="60" rx="8" fill="#eef4ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="580" y="136" text-anchor="middle" fill="#1d4ed8" font-weight="600">Preprocessing +</text>
+    <text x="580" y="152" text-anchor="middle" fill="#1d4ed8" font-size="10.5">Mel-spectrogram</text>
+    <text x="580" y="164" text-anchor="middle" fill="#1d4ed8" font-size="10.5">extraction</text>
+
+    <rect x="680" y="110" width="130" height="60" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="745" y="136" text-anchor="middle" fill="#047857" font-weight="600">CNN model</text>
+    <text x="745" y="152" text-anchor="middle" fill="#047857" font-size="10.5">inference</text>
+    <text x="745" y="164" text-anchor="middle" fill="#047857" font-size="10.5">(loaded at startup)</text>
+
+    <rect x="845" y="110" width="175" height="60" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="932" y="136" text-anchor="middle" fill="#047857" font-weight="600">JSON response</text>
+    <text x="932" y="152" text-anchor="middle" fill="#047857" font-size="10.5">prediction, confidence,</text>
+    <text x="932" y="164" text-anchor="middle" fill="#047857" font-size="10.5">per-class probabilities</text>
+
+    <!-- optional report branch -->
+    <rect x="680" y="220" width="340" height="50" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="850" y="240" text-anchor="middle" fill="#b45309" font-weight="600" font-size="12">Optional: POST /report</text>
+    <text x="850" y="257" text-anchor="middle" fill="#b45309" font-size="10.5">LLM report generation from an existing prediction (separate call, not required)</text>
+  </g>
+
+  <path d="M150,140 L180,140" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow4)"/>
+  <path d="M315,140 L345,140" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow4)"/>
+  <path d="M480,140 L510,140" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow4)"/>
+  <path d="M645,140 L675,140" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow4)"/>
+  <path d="M810,140 L840,140" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow4)"/>
+  <path d="M932,170 C932,195 932,200 900,220" stroke="#b45309" stroke-width="2" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowDash2)"/>
+  <path d="M932,170 C932,210 200,230 90,200 C60,190 60,180 82,172" stroke="#6b7280" stroke-width="1.5" fill="none" marker-end="url(#arrow4)"/>
+  <text x="500" y="292" text-anchor="middle" font-size="11" fill="#9ca3af">Research prototype only — not for medical diagnosis.</text>
+</svg>

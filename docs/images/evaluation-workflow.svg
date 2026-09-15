@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1000" height="500" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1f2328">DeepBreath — Evaluation / Data-Splitting Workflow</text>
+  <text x="500" y="56" text-anchor="middle" font-size="13" fill="#6b7280">Legacy sample-level split vs. patient-independent grouped split</text>
+
+  <!-- shared source -->
+  <rect x="350" y="76" width="300" height="42" rx="8" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="500" y="102" text-anchor="middle" font-size="13" fill="#374151" font-weight="600">ICBHI respiratory audio samples (incl. augmented variants)</text>
+  <path d="M500,118 L500,140" stroke="#6b7280" stroke-width="2" fill="none"/>
+  <path d="M500,140 L230,140" stroke="#6b7280" stroke-width="2" fill="none"/>
+  <path d="M500,140 L770,140" stroke="#6b7280" stroke-width="2" fill="none"/>
+  <path d="M230,140 L230,160" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow3)"/>
+  <path d="M770,140 L770,160" stroke="#6b7280" stroke-width="2" fill="none" marker-end="url(#arrow3)"/>
+
+  <!-- Legacy column -->
+  <rect x="60" y="166" width="340" height="300" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="230" y="194" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b45309">Legacy MSc Sample-Level Split</text>
+
+  <g font-size="12.5" fill="#92400e">
+    <rect x="80" y="212" width="300" height="40" rx="6" fill="#ffffff" stroke="#f59e0b"/>
+    <text x="230" y="236" text-anchor="middle">Random split at the sample level</text>
+
+    <rect x="80" y="262" width="300" height="52" rx="6" fill="#ffffff" stroke="#f59e0b"/>
+    <text x="230" y="284" text-anchor="middle">Train / validation partitions</text>
+    <text x="230" y="300" text-anchor="middle" font-size="11">(legacy_train_split.csv / legacy_validation_split.csv)</text>
+
+    <rect x="80" y="326" width="300" height="56" rx="6" fill="#ffffff" stroke="#dc2626"/>
+    <text x="230" y="348" text-anchor="middle" fill="#b91c1c" font-weight="600">Leakage risk</text>
+    <text x="230" y="364" text-anchor="middle" font-size="11" fill="#b91c1c">same patient / augmented cycle can</text>
+    <text x="230" y="378" text-anchor="middle" font-size="11" fill="#b91c1c">appear in both train and validation</text>
+  </g>
+  <text x="230" y="404" text-anchor="middle" font-size="11.5" fill="#92400e">Kept as historical research provenance.</text>
+  <text x="230" y="422" text-anchor="middle" font-size="11.5" fill="#92400e">Not used as the generalisation estimate.</text>
+
+  <!-- Grouped column -->
+  <rect x="600" y="166" width="340" height="300" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="770" y="194" text-anchor="middle" font-size="14.5" font-weight="700" fill="#047857">Patient-Independent Grouped Split</text>
+
+  <g font-size="12.5" fill="#065f46">
+    <rect x="620" y="212" width="300" height="40" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="770" y="236" text-anchor="middle">Grouped by patient ID + base cycle</text>
+
+    <rect x="620" y="262" width="300" height="52" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="770" y="284" text-anchor="middle">Deterministic class-aware split</text>
+    <text x="770" y="300" text-anchor="middle" font-size="11">seed = 42, train 22 / val 5 / test 6 patients</text>
+
+    <rect x="620" y="326" width="300" height="56" rx="6" fill="#ffffff" stroke="#10b981"/>
+    <text x="770" y="348" text-anchor="middle" font-weight="600">Zero leakage</text>
+    <text x="770" y="364" text-anchor="middle" font-size="11">0 patient overlap, 0 base-cycle overlap</text>
+    <text x="770" y="378" text-anchor="middle" font-size="11">across train / validation / test</text>
+  </g>
+  <text x="770" y="404" text-anchor="middle" font-size="11.5" fill="#065f46">Preferred reliability signal for this project.</text>
+  <text x="770" y="422" text-anchor="middle" font-size="11.5" fill="#065f46">Repeated across 5 seeds to report variance.</text>
+
+  <text x="500" y="488" text-anchor="middle" font-size="11.5" fill="#6b7280">Grouped results are still a research estimate, not a clinical performance claim.</text>
+</svg>

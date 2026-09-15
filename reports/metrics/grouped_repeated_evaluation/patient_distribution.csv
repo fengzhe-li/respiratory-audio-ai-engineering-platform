@@ -1,0 +1,7 @@
+disease,patients,base_cycles,samples,augmented_samples
+Bronchiectasis,7,104,624,520
+Bronchiolitis,4,104,624,520
+COPD,3,104,624,520
+Healthy,9,104,624,520
+Pneumonia,2,104,624,520
+URTI,8,104,624,520
