@@ -19,6 +19,7 @@ from deepbreath.reporting.report_generator import (
     StructuredReportInput,
     generate_structured_report,
 )
+from deepbreath.reporting.llm_client import LLMConfigurationError
 
 
 LOGGER = logging.getLogger("deepbreath.api")
@@ -233,6 +234,11 @@ def report(request: ReportRequest) -> ReportResponse:
         generated = generate_structured_report(
             report_input
         )
+    except LLMConfigurationError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="LLM reporting is not configured.",
+        ) from exc
     except ValueError as exc:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
     except RuntimeError as exc:

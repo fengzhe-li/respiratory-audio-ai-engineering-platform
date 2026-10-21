@@ -168,6 +168,15 @@ class ReportEndpointTests(unittest.TestCase):
         self.assertEqual(response.status_code, 503)
         self.assertIn("LLM reporting is not configured", response.json()["detail"])
 
+    def test_report_endpoint_invalid_prediction_data_returns_400(self):
+        payload = {
+            "prediction": "not-a-model-class",
+            "confidence": 0.8,
+            "probabilities": valid_probabilities(),
+        }
+        response = self.client.post("/report", json=payload)
+        self.assertEqual(response.status_code, 400)
+
     def test_api_without_llm_config_keeps_core_inference_available(self):
         with patch.dict(os.environ, {}, clear=True):
             response = self.client.get("/health")

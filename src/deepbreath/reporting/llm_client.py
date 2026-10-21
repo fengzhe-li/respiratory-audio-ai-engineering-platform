@@ -2,6 +2,10 @@ import os
 from dataclasses import dataclass
 
 
+class LLMConfigurationError(ValueError):
+    """Raised when server-side LLM configuration is unavailable or invalid."""
+
+
 @dataclass(frozen=True)
 class LLMConfig:
     api_key: str
@@ -23,7 +27,7 @@ class LLMConfig:
             if not value
         ]
         if missing:
-            raise ValueError(
+            raise LLMConfigurationError(
                 "Missing LLM configuration: "
                 + ", ".join(missing)
                 + ". Copy .env.example and set provider-specific values."
