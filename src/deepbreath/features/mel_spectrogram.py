@@ -22,7 +22,11 @@ def extract_mel_spectrogram(path: str | Path):
 
 
 def extract_legacy_preprocessed_mel_spectrogram(path: str | Path):
-    """Extract Mel features after applying legacy six-second pad/clip preprocessing."""
+    """Extract legacy features from exactly six seconds of audio.
+
+    Short audio is center-padded and long audio is clipped to the initial six
+    seconds; this is not whole-recording analysis or cycle segmentation.
+    """
 
     sound_array, sample_rate = librosa.load(path, sr=EXPECTED_SAMPLE_RATE)
     fixed_audio = pad_or_clip(sound_array, sample_rate)

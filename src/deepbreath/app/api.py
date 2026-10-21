@@ -156,25 +156,27 @@ def _validate_audio_file(path: Path) -> None:
 
 
 async def _persist_upload(file: UploadFile) -> Path:
-    data = await file.read()
-    if not data:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Uploaded file is empty.",
-        )
-    if len(data) > SETTINGS.max_upload_bytes:
-        raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            detail=f"Uploaded file must be {SETTINGS.max_upload_bytes // (1024 * 1024)} MB or smaller.",
-        )
-
     temporary = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+    total = 0
+    keep = False
     try:
-        temporary.write(data)
+        while chunk := await file.read(1024 * 1024):
+            total += len(chunk)
+            if total > SETTINGS.max_upload_bytes:
+                raise HTTPException(
+                    status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                    detail="Uploaded WAV file exceeds the configured size limit.",
+                )
+            temporary.write(chunk)
         temporary.flush()
+        if total == 0:
+            raise HTTPException(status_code=400, detail="Uploaded file is empty.")
+        keep = True
         return Path(temporary.name)
     finally:
         temporary.close()
+        if not keep:
+            Path(temporary.name).unlink(missing_ok=True)
 
 
 @app.post("/predict", response_model=PredictionResponse)
@@ -221,18 +223,22 @@ async def predict(file: UploadFile = File(...)) -> PredictionResponse:
 @app.post("/report", response_model=ReportResponse)
 def report(request: ReportRequest) -> ReportResponse:
     try:
-        generated = generate_structured_report(
-            StructuredReportInput(
-                prediction=request.prediction,
-                confidence=request.confidence,
-                probabilities=request.probabilities,
-                optional_features=request.optional_features,
-            )
+        report_input = StructuredReportInput(
+            prediction=request.prediction,
+            confidence=request.confidence,
+            probabilities=request.probabilities,
+            optional_features=request.optional_features,
         )
-    except (RuntimeError, ValueError) as exc:
+        report_input.validate()
+        generated = generate_structured_report(
+            report_input
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+    except RuntimeError as exc:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"LLM reporting is not configured: {exc}",
+            detail="LLM reporting is not configured.",
         ) from exc
     except Exception as exc:
         LOGGER.exception("DeepBreath report generation failed")

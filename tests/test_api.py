@@ -1,13 +1,17 @@
 import math
+import asyncio
 import tempfile
 import unittest
 from pathlib import Path
+from dataclasses import replace
+from unittest.mock import patch
 
 import numpy as np
 import soundfile as sf
 from fastapi.testclient import TestClient
 
 from deepbreath.app.api import app
+from deepbreath.app import api as api_module
 from deepbreath.ml_contract import AUDIO_DURATION_SECONDS, CLASS_NAMES, EXPECTED_SAMPLE_RATE, NUM_CLASSES
 
 
@@ -83,6 +87,34 @@ class TestDeepBreathApi(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
+
+    def test_predict_rejects_oversized_payload(self):
+        with patch.object(api_module, "SETTINGS", replace(api_module.SETTINGS, max_upload_bytes=8)):
+            response = self.client.post(
+                "/predict",
+                files={"file": ("large.wav", b"0123456789", "audio/wav")},
+            )
+        self.assertEqual(response.status_code, 413)
+
+    def test_oversized_upload_temp_file_is_removed(self):
+        original = api_module.tempfile.NamedTemporaryFile
+        created = []
+
+        def capture_tempfile(*args, **kwargs):
+            handle = original(*args, **kwargs)
+            created.append(Path(handle.name))
+            return handle
+
+        class FakeUpload:
+            async def read(self, _size):
+                return b"0123456789"
+
+        with patch.object(api_module, "SETTINGS", replace(api_module.SETTINGS, max_upload_bytes=8)):
+            with patch.object(api_module.tempfile, "NamedTemporaryFile", side_effect=capture_tempfile):
+                with self.assertRaises(api_module.HTTPException):
+                    asyncio.run(api_module._persist_upload(FakeUpload()))
+        self.assertEqual(len(created), 1)
+        self.assertFalse(created[0].exists())
 
 
 if __name__ == "__main__":

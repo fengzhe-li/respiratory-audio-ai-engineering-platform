@@ -43,7 +43,7 @@ class ApiSettings:
 
 def get_api_settings() -> ApiSettings:
     default_model_path = _project_root() / "models" / LEGACY_MODEL_FILENAME
-    return ApiSettings(
+    settings = ApiSettings(
         model_path=Path(os.getenv("DEEPBREATH_MODEL_PATH") or default_model_path),
         max_upload_bytes=_get_int("DEEPBREATH_MAX_UPLOAD_BYTES", 25 * 1024 * 1024),
         max_audio_duration_seconds=_get_float("DEEPBREATH_MAX_AUDIO_DURATION_SECONDS", 60.0),
@@ -51,3 +51,10 @@ def get_api_settings() -> ApiSettings:
         port=_get_int("DEEPBREATH_API_PORT", 8000),
         log_level=os.getenv("DEEPBREATH_LOG_LEVEL", "INFO").upper(),
     )
+    if settings.max_upload_bytes <= 0:
+        raise ValueError("DEEPBREATH_MAX_UPLOAD_BYTES must be positive")
+    if settings.max_audio_duration_seconds <= 0:
+        raise ValueError("DEEPBREATH_MAX_AUDIO_DURATION_SECONDS must be positive")
+    if settings.port <= 0 or settings.port > 65535:
+        raise ValueError("DEEPBREATH_API_PORT must be between 1 and 65535")
+    return settings

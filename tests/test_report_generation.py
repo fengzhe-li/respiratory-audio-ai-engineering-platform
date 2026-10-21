@@ -13,7 +13,13 @@ from deepbreath.reporting.report_generator import (
     StructuredReportOutput,
     build_report_prompt,
     generate_structured_report,
+    _coerce_report_output,
 )
+
+
+def valid_probabilities():
+    return {name: (0.8 if name == "COPD" else 0.2 if name == "Healthy" else 0.0)
+            for name in ("Bronchiectasis", "Bronchiolitis", "COPD", "Healthy", "Pneumonia", "URTI")}
 
 
 class MockMessage:
@@ -56,7 +62,7 @@ class ReportGenerationTests(unittest.TestCase):
         report_input = StructuredReportInput(
             prediction="COPD",
             confidence=0.8,
-            probabilities={"COPD": 0.8, "Healthy": 0.2},
+            probabilities=valid_probabilities(),
             optional_features={"crackles_total": 2},
         )
 
@@ -73,7 +79,7 @@ class ReportGenerationTests(unittest.TestCase):
             StructuredReportInput(
                 prediction="COPD",
                 confidence=0.8,
-                probabilities={"COPD": 0.8, "Healthy": 0.2},
+                probabilities=valid_probabilities(),
             ),
             client=MockClient(),
             config=config,
@@ -90,9 +96,30 @@ class ReportGenerationTests(unittest.TestCase):
                     StructuredReportInput(
                         prediction="COPD",
                         confidence=0.8,
-                        probabilities={"COPD": 0.8, "Healthy": 0.2},
+                        probabilities=valid_probabilities(),
                     )
                 )
+
+    def test_malformed_json_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "valid JSON"):
+            _coerce_report_output("not json")
+
+    def test_array_missing_fields_empty_and_oversized_responses_are_rejected(self):
+        cases = ["[]", '{"summary":"x"}', '{"summary":" ","interpretation":"x","limitations":"x"}', "x" * 5001]
+        for raw in cases:
+            with self.subTest(raw=raw[:20]), self.assertRaises(ValueError):
+                _coerce_report_output(raw)
+
+    def test_unsafe_claim_is_rejected(self):
+        raw = json.dumps({"summary": "The model diagnosed COPD.", "interpretation": "Research output only.", "limitations": "This is not a diagnosis and cannot guide treatment."})
+        with self.assertRaisesRegex(ValueError, "unsupported medical claims"):
+            _coerce_report_output(raw)
+
+    def test_inconsistent_probabilities_are_rejected(self):
+        probabilities = valid_probabilities()
+        probabilities["COPD"] = 0.7
+        with self.assertRaisesRegex(ValueError, "inconsistent"):
+            StructuredReportInput("COPD", 0.8, probabilities).validate()
 
 
 class ReportEndpointTests(unittest.TestCase):
@@ -109,7 +136,7 @@ class ReportEndpointTests(unittest.TestCase):
         payload = {
             "prediction": "COPD",
             "confidence": 0.8,
-            "probabilities": {"COPD": 0.8, "Healthy": 0.2},
+            "probabilities": valid_probabilities(),
             "optional_features": {"wheezes_total": 1},
         }
         mocked_output = StructuredReportOutput(
@@ -132,7 +159,7 @@ class ReportEndpointTests(unittest.TestCase):
         payload = {
             "prediction": "COPD",
             "confidence": 0.8,
-            "probabilities": {"COPD": 0.8, "Healthy": 0.2},
+            "probabilities": valid_probabilities(),
         }
 
         with patch.dict(os.environ, {}, clear=True):
